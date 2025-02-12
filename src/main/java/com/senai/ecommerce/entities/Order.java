@@ -2,8 +2,10 @@ package com.senai.ecommerce.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.apache.catalina.User;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @Data
 @Entity
@@ -14,13 +16,13 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private Timestamp moment;
+    private Instant moment;
     private OrderStatus status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
-
+}
